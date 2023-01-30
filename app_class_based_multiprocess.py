@@ -20,6 +20,7 @@ class WSGIServer:
             self.client_socket, addr = self.server_socket.accept()
             p = Process(target=self.handle_request)
             p.start()
+            self.client_socket.close()
 
     def handle_request(self):
         request = self.client_socket.recv(1024).decode('utf-8')
